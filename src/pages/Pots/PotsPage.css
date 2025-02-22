@@ -5,23 +5,111 @@
   margin-top: 2rem;
 }
 
+.pot-details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
 
-[role="meter"] {
+.pot-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.txt-gray {
+  color: #7a7a7a;
+}
+
+.txt-size-xl {
+  font-size: 1.25rem;
+}
+
+.progress-meter-container {
+  position: relative;
+  width: 100%;
+  margin-block: 2.0rem;
+}
+
+.progress-meter {
+  position: relative;
   height: 20px;
   width: 100%;
   border: 2px solid #eee;
   border-radius: 100vw;
-  position: relative;
+  background: #f3f3f3;
+  overflow: hidden;
 }
 
 .fill {
-  --fill-percentage: 50%;
+  height: 100%;
+  background: #4caf50;
+  display: block;
+  transition: width 0.3s ease-in-out;
+}
 
+.percentage-label {
   position: absolute;
-  inset: 0;
-  background-image: linear-gradient(90deg, #1a3856b2, #22303d var(--fill-percentage), transparent var(--fill-percentage));
-  background-size: 100% 100%;
-  border-radius: 100vw;
+  bottom: -25px;  /* Adjusts the position below the progress bar */
+  left: 0;  /* Aligns the percentage text to the left */
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.button-group button {
+  flex: 1;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
   text-align: center;
-  color: #bcbcbc;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h3 {
+  margin-bottom: 1rem;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.modal-buttons button {
+  flex: 1;
 }
