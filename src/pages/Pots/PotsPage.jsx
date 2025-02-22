@@ -96,50 +96,59 @@ export default function PotsPage() {
       )}
 
 <div id="pots-container">
-  {data.pots.map((pot) => (
-    <Card key={`pot-${pot.id}`} title={pot.name}>
-      <div className="pot-details">
-        <div className="pot-stat">
-          <span className="txt-gray">Total saved</span>
-          <b className="txt-size-xl">${pot.total}</b>
-        </div>
-        <div className="pot-stat">
-          <span className="txt-gray">Target of</span>
-          <b className="txt-size-xl">${pot.target}</b>
-        </div>
-      </div>
+  {data.pots.map((pot) => {
+    const percentage = (pot.total * 100) / pot.target;
 
-      {/* Updated Progress Bar with Percentage Below It */}
-      <div className="progress-meter-container">
+    const getColor = (percentage) => {
+      if (percentage < 30) return "#FF6347"; // Red for low progress
+      if (percentage < 70) return "#FFD700"; // Yellow for medium progress
+      return "#32CD32"; // Green for high progress
+    };
+
+    return (
+      <Card key={`pot-${pot.id}`} title={pot.name}>
+        <div className="pot-details">
+          <div className="pot-stat">
+            <span className="txt-gray">Total saved</span>
+            <b className="txt-size-xl">${pot.total}</b>
+          </div>
+          <div className="pot-stat">
+            <span className="txt-gray">Target of</span>
+            <b className="txt-size-xl">${pot.target}</b>
+          </div>
+        </div>
+
+       
+
         <div
-          className="progress-meter"
           role="meter"
           aria-valuenow={pot.total}
           aria-valuemin="0"
           aria-valuemax={pot.target}
           aria-label="Total saved"
+          className="progress-meter"
         >
           <span
-            style={{ width: `${(pot.total * 100) / pot.target}%` }}
+            style={{
+              width: `${percentage}%`,
+              backgroundColor: getColor(percentage),
+            }}
             className="fill"
           ></span>
         </div>
-        {/* Percentage Label Positioned Outside at the Bottom-Left */}
-        <div className="percentage-label">
-          {((pot.total * 100) / pot.target).toFixed(0)}%
-        </div>
-      </div>
+		 {/* Percentage Number Positioned Below */}
+		 <div className="percentage-label">{percentage.toFixed(0)}%</div>
 
-      <div className="button-group">
-        <Button onClick={() => openMoneyModal(pot.id, "add")}>Add money</Button>
-        <Button type="secondary" onClick={() => openMoneyModal(pot.id, "withdraw")}>
-          Withdraw money
-        </Button>
-        <Button type="danger" onClick={() => deletePot(pot.id)}>Delete</Button>
-      </div>
-    </Card>
-  ))}
+        <div className="button-group">
+          <Button onClick={() => openMoneyModal(pot.id, "add")}>Add money</Button>
+          <Button type="secondary" onClick={() => openMoneyModal(pot.id, "withdraw")}>Withdraw money</Button>
+          <Button type="danger" onClick={() => deletePot(pot.id)}>Delete</Button>
+        </div>
+      </Card>
+    );
+  })}
 </div>
+
 
       {moneyModal.visible && (
         <div className="modal-overlay">

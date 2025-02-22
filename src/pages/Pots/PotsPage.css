@@ -31,29 +31,49 @@
   margin-block: 2.0rem;
 }
 
+/* Progress bar container */
+/* Container for the progress bar and percentage label */
+.progress-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligns everything to the left */
+}
+
+/* Progress bar styles */
 .progress-meter {
   position: relative;
-  height: 20px;
+  height: 10px; /* Adjust thickness */
   width: 100%;
-  border: 2px solid #eee;
+  border: 1px solid #ddd;
   border-radius: 100vw;
   background: #f3f3f3;
   overflow: hidden;
+  margin-bottom: 4px; /* Space for percentage label */
 }
 
-.fill {
-  height: 100%;
-  background: #4caf50;
+/* Progress bar fill with transition */
+.progress-meter .fill {
   display: block;
-  transition: width 0.3s ease-in-out;
+  height: 100%;
+  border-radius: 100vw;
+  transition: width 0.4s ease-in-out;
 }
 
+/* Percentage label correctly positioned BELOW the progress bar */
 .percentage-label {
-  position: absolute;
-  bottom: -25px;  /* Adjusts the position below the progress bar */
-  left: 0;  /* Aligns the percentage text to the left */
-  font-size: 14px;
+  font-size: 0.8rem;
   font-weight: bold;
+  display: block;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-top: 4px; /* Space between bar and text */
+  text-align: left; /* Ensures alignment to the left */
+}
+
+
+.pot-stat {
+  font-size: 12px; /* Reduce size of total saved and target text */
+  font-weight: 400; /* Make it thinner */
   color: #333;
 }
 
@@ -64,7 +84,10 @@
 }
 
 .button-group button {
-  flex: 1;
+  padding: 4px 10px;  /* Reduce padding to make the button smaller */
+  font-size: 12px;  /* Reduce font size */
+  min-width: auto;  /* Ensure buttons don’t stretch too much */
+  height: 32px;  /* Adjust button height */
 }
 
 /* Modal Styles */
@@ -97,10 +120,10 @@
 
 .modal-content input {
   width: 100%;
-  padding: 10px;
+  padding: 6px;
   margin-bottom: 1rem;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 3px;
   font-size: 1rem;
 }
 
