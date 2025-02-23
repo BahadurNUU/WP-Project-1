@@ -31,27 +31,23 @@
   margin-block: 2.0rem;
 }
 
-/* Progress bar container */
-/* Container for the progress bar and percentage label */
 .progress-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Aligns everything to the left */
+  align-items: flex-start;
 }
 
-/* Progress bar styles */
 .progress-meter {
   position: relative;
-  height: 10px; /* Adjust thickness */
+  height: 10px;
   width: 100%;
   border: 1px solid #ddd;
   border-radius: 100vw;
   background: #f3f3f3;
   overflow: hidden;
-  margin-bottom: 4px; /* Space for percentage label */
+  margin-bottom: 4px;
 }
 
-/* Progress bar fill with transition */
 .progress-meter .fill {
   display: block;
   height: 100%;
@@ -59,24 +55,14 @@
   transition: width 0.4s ease-in-out;
 }
 
-/* Percentage label correctly positioned BELOW the progress bar */
 .percentage-label {
   font-size: 0.8rem;
   font-weight: bold;
-  display: block;
   padding-top: 8px;
   padding-bottom: 8px;
-  margin-top: 4px; /* Space between bar and text */
-  text-align: left; /* Ensures alignment to the left */
+  margin-top: 4px;
+  text-align: left;
 }
-
-
-.pot-stat {
-  font-size: 12px; /* Reduce size of total saved and target text */
-  font-weight: 400; /* Make it thinner */
-  color: #333;
-}
-
 
 .button-group {
   display: flex;
@@ -84,77 +70,13 @@
 }
 
 .button-group button {
-  padding: 4px 10px;  /* Reduce padding to make the button smaller */
-  font-size: 12px;  /* Reduce font size */
-  min-width: auto;  /* Ensure buttons don’t stretch too much */
-  height: 32px;  /* Adjust button height */
+  padding: 4px 10px;
+  font-size: 12px;
+  min-width: auto;
+  height: 32px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-/* Modal Styles */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 600px;
-  max-height: 500px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.modal-content h3 {
-  margin-bottom: 1rem;
-}
-.modal-description{
-  margin-bottom: 1rem;
-}
-.modal-label{
-  margin-bottom: 3rem;
-}
-.modal-content input{
-  margin: 5px;
-}
-.modal-input {
-  width: 100%;
-  padding: 6px;
-  margin-bottom: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  font-size: 1rem;
-}
-.input-add {
-  width: 100%;
-  border: 1px solid #ddd;
-  margin-bottom: 0;
-  border-radius: 3px;
-  font-size: 1rem;
-}
-.input-wrapper {
-  position: relative;
-}
-.modal-buttons {
-  margin-top: 1rem;
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-}
-
-.modal-buttons button {
-  flex: 1;
-}
-/* Modal Overlay */
 .modal {
   position: fixed;
   top: 0;
@@ -166,69 +88,92 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
 }
-.clr{
-  margin: 0;
-  padding: 0;
-  clear: both;
+
+.modal.fade-out {
+  animation: fadeOut 0.3s ease-in-out forwards;
 }
-/* Modal Content */
+
 .modal-content {
   background: white;
+  padding: 2rem;
   border-radius: 8px;
   width: 90%;
-  max-width: 400px;
-  text-align: left;
+  max-width: 600px;
+  max-height: 500px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content h3 {
+  margin-bottom: 1rem;
+}
+
+.modal-description {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.modal-label {
+  margin-bottom: 3rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+#pots .modal-content input {
+  width: 100%;
+  padding: 6px;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-size: 1rem;
+}
+
+.input-wrapper {
   position: relative;
 }
 
-/* Overlay Clickable Area */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: transparent;
-}
-
-/* Flex Layouts */
-.modal-flex-column {
+.modal-buttons {
   display: flex;
-  flex-direction: column;
   gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
 }
 
-.flex-between {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.modal-buttons button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-/* Progress Info */
-.progress-info {
-  margin-bottom: 1rem;
+#pots .input-add {
+  height: 50px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
 }
 
-.progress-section {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+.modal-input {
+  height: 50px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
 }
 
-/* Inputs */
-.inputs {
-  margin-bottom: 1rem;
+.modal-buttons button:hover {
+  background-color: white;
+  transform: translateY(-2px);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  color: black;
 }
 
-.input label {
-  font-weight: bold;
-  margin-bottom: 4px;
-  display: block;
-}
-
-/* Confirm Button */
 .primary-modal-btn {
   width: 100%;
   padding: 12px;
@@ -238,9 +183,50 @@
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .primary-modal-btn:hover {
   background: #333;
+  color: black;
+  transform: scale(1.05);
+  border: 1px solid black;
+}
+
+.cancel-btn {
+  background: #ddd;
+  color: black;
+}
+
+.cancel-btn:hover {
+  background: #bbb;
+  transform: scale(1.05);
+}
+
+.clr {
+  margin: 0;
+  padding: 0;
+  clear: both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
 }
