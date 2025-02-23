@@ -68,87 +68,93 @@ export default function PotsPage() {
     <div id="pots" role="tabpanel" aria-labelledby="tab-4" tabIndex="0">
       <div className="d-flex">
         <h2 className="section-title">Pots</h2>
-        <Button type="primary" onClick={addNewPot}>Add New Pot</Button>
+        <Button type="primary" onClick={() => setIsAddingPot(true)} className="hover-effect color-change">+Add New Pot</Button>
       </div>
 
       {isAddingPot && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <h3>Add New Pot</h3>
+            <h3>+Add New Pot</h3>
+            <p className="modal-description">
+              <small>
+              Create a pot to set savings targets. These can help keep you on track as you save for special purchases.              </small>
+            </p>
+            <label className="modal-label"><small>Pot Name</small></label>
             <input
               type="text"
-              placeholder="Enter pot name"
+              className="modal-input"
+              placeholder="e.g. Rainy Days"
               value={newPotName}
-              onChange={(e) => setNewPotName(e.target.value)}
+              onChange={(e) => setNewPotName(e.target.value)} 
             />
-            <input
-              type="number"
-              placeholder="Enter target amount"
-              value={newPotTarget}
-              onChange={(e) => setNewPotTarget(e.target.value)}
-            />
+            <label className="modal-label"> <small>Target Value $</small></label>
+            <div className="input-wrapper">
+              <input
+                type="number"
+                className="modal-input"
+                placeholder="e.g. 2000"
+                value={newPotTarget}
+                onChange={(e) => setNewPotTarget(e.target.value)}
+              />
+            </div>
             <div className="modal-buttons">
-              <Button type="primary" onClick={confirmNewPot}>Confirm</Button>
-              <Button type="secondary" onClick={() => setIsAddingPot(false)}>Cancel</Button>
+              <Button type="primary" onClick={confirmNewPot} className="hover-effect color-change">Confirm</Button>
+              <Button type="secondary" onClick={() => setIsAddingPot(false)} className="hover-effect color-change">Cancel</Button>
             </div>
           </div>
         </div>
       )}
 
-<div id="pots-container">
-  {data.pots.map((pot) => {
-    const percentage = (pot.total * 100) / pot.target;
+      <div id="pots-container">
+        {data.pots.map((pot) => {
+          const percentage = (pot.total * 100) / pot.target;
 
-    const getColor = (percentage) => {
-      if (percentage < 30) return "#FF6347"; // Red for low progress
-      if (percentage < 70) return "#FFD700"; // Yellow for medium progress
-      return "#32CD32"; // Green for high progress
-    };
+          const getColor = (percentage) => {
+            if (percentage < 30) return "#FF6347"; // Red for low progress
+            if (percentage < 70) return "#FFD700"; // Yellow for medium progress
+            return "#32CD32"; // Green for high progress
+          };
 
-    return (
-      <Card key={`pot-${pot.id}`} title={pot.name}>
-        <div className="pot-details">
-          <div className="pot-stat">
-            <span className="txt-gray">Total saved</span>
-            <b className="txt-size-xl">${pot.total}</b>
-          </div>
-          <div className="pot-stat">
-            <span className="txt-gray">Target of</span>
-            <b className="txt-size-xl">${pot.target}</b>
-          </div>
-        </div>
+          return (
+            <Card key={`pot-${pot.id}`} title={pot.name} className="pot-card">
+              <div className="pot-details">
+                <div className="pot-stat">
+                  <span className="txt-gray">Total saved</span>
+                  <b className="txt-size-xl">${pot.total}</b>
+                </div>
+                <div className="pot-stat">
+                  <span className="txt-gray">Target of</span>
+                  <b className="txt-size-xl">${pot.target}</b>
+                </div>
+              </div>
 
-       
+              <div
+                role="meter"
+                aria-valuenow={pot.total}
+                aria-valuemin="0"
+                aria-valuemax={pot.target}
+                aria-label="Total saved"
+                className="progress-meter"
+              >
+                <span
+                  style={{
+                    width: `${percentage}%`,
+                    backgroundColor: getColor(percentage),
+                  }}
+                  className="fill"
+                ></span>
+              </div>
+              <div className="percentage-label">{percentage.toFixed(0)}%</div>
 
-        <div
-          role="meter"
-          aria-valuenow={pot.total}
-          aria-valuemin="0"
-          aria-valuemax={pot.target}
-          aria-label="Total saved"
-          className="progress-meter"
-        >
-          <span
-            style={{
-              width: `${percentage}%`,
-              backgroundColor: getColor(percentage),
-            }}
-            className="fill"
-          ></span>
-        </div>
-		 {/* Percentage Number Positioned Below */}
-		 <div className="percentage-label">{percentage.toFixed(0)}%</div>
-
-        <div className="button-group">
-          <Button onClick={() => openMoneyModal(pot.id, "add")}>Add money</Button>
-          <Button type="secondary" onClick={() => openMoneyModal(pot.id, "withdraw")}>Withdraw money</Button>
-          <Button type="danger" onClick={() => deletePot(pot.id)}>Delete</Button>
-        </div>
-      </Card>
-    );
-  })}
-</div>
-
+              <div className="button-group">
+                <Button onClick={() => openMoneyModal(pot.id, "add")} className="hover-effect color-change">Add money</Button>
+                <Button type="secondary" onClick={() => openMoneyModal(pot.id, "withdraw")} className="hover-effect color-change">Withdraw money</Button>
+                <Button type="danger" onClick={() => deletePot(pot.id)} className="hover-effect color-change">Delete</Button>
+              </div>
+            </Card>
+          );
+        })}
+      </div>
 
       {moneyModal.visible && (
         <div className="modal-overlay">
@@ -161,8 +167,8 @@ export default function PotsPage() {
               placeholder="Amount"
             />
             <div className="modal-buttons">
-              <Button type="primary" onClick={handleMoneyChange}>Confirm</Button>
-              <Button type="secondary" onClick={() => setMoneyModal({ visible: false, type: "", potId: null })}>Cancel</Button>
+              <Button type="primary" onClick={handleMoneyChange} className="hover-effect color-change">Confirm</Button>
+              <Button type="secondary" onClick={() => setMoneyModal({ visible: false, type: "", potId: null })} className="hover-effect color-change">Cancel</Button>
             </div>
           </div>
         </div>

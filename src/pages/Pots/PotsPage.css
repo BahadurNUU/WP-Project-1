@@ -109,15 +109,20 @@
   padding: 2rem;
   border-radius: 8px;
   width: 90%;
-  max-width: 400px;
-  text-align: center;
+  max-width: 600px;
+  max-height: 500px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .modal-content h3 {
   margin-bottom: 1rem;
 }
-
+.modal-description{
+  margin-bottom: 1rem;
+}
+.modal-label{
+  margin-bottom: 3rem;
+}
 .modal-content input {
   width: 100%;
   padding: 6px;
@@ -126,7 +131,9 @@
   border-radius: 3px;
   font-size: 1rem;
 }
-
+.input-wrapper {
+  position: relative;
+}
 .modal-buttons {
   display: flex;
   gap: 1rem;
