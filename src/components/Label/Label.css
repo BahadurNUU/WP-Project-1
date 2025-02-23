@@ -1,0 +1,19 @@
+.label {
+  display: inline-block;
+  padding: 0.5em;
+  border-radius: 6px;
+  margin: 0.25em;
+  white-space: nowrap;
+}
+
+.label.label-primary {
+  background-color: #78a9da2a;
+  border: 1px solid #2C3E50;
+  color: #2C3E50;
+}
+
+.label.label-secondary {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  color: #001529;
+}

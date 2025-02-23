@@ -1,11 +1,13 @@
-.section-title {
-  margin-bottom: 2rem;
+ul, ol {
+  list-style: none;
+  padding: 0;
 }
 
 .wrapper {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
+  margin: 2rem 0;
 }
 
 @media (width <= 1024px) {
@@ -17,21 +19,39 @@
     grid-column: span 2;
   }
 
-  #transactions {
+  #budget {
     grid-row: 4 / 5;
+    grid-column: 1 / 3;
   }
 }
 
-#pots, #transactions {
+@media (width <= 760px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .wrapper > * {
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+}
+
+#pots, #bills {
   grid-column: span 2;
 }
 
+#budget {
+  grid-row: span 2;
+}
+
+#transactions {
+  grid-column: span 3;
+}
+
 .card-list {
-  list-style: none;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
-  padding-left: 0;
   max-height: 10rem;
   overflow-y: scroll;
 }
@@ -43,7 +63,7 @@
 
 .block {
   flex-grow: 1;
-  flex-basis: 150px;
+  width: 150px;
   background-color: #eee;
   padding: 10px;
   border-radius: 12px;
@@ -56,18 +76,33 @@
   margin: 0.5rem 0;
 }
 
-
-.chart-container {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  outline: 2px solid pink;
-  height: 150px;
-  justify-content: space-between;
-  align-items: end;
+table {
+  width: 100%;
+  border-spacing: 0;
 }
 
-.chart-container > li {
-  width: 50px;
-  background-color: blue;
+th {
+  text-align: left;
+  padding: 1rem;
+}
+
+td {
+  padding: 1rem;
+  border-bottom: 2px solid #eee;
+}
+
+tr:hover {
+  background-color: #fafafa;
+}
+
+table tr:first-child th {
+  background-color: #eee;
+}
+
+table tr:first-child th:first-child {
+  border-start-start-radius: 12px;
+}
+
+table tr:last-child th:last-child {
+  border-start-end-radius: 12px;
 }

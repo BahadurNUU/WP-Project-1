@@ -1,0 +1,15 @@
+#budgets-container {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+#cards {
+  flex-grow: 1;
+}
+
+#cards > * {
+  margin-bottom: 2rem;
+}

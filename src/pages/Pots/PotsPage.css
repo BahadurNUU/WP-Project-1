@@ -1,0 +1,138 @@
+#pots-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.pot-details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.pot-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.txt-gray {
+  color: #7a7a7a;
+}
+
+.txt-size-xl {
+  font-size: 1.25rem;
+}
+
+.progress-meter-container {
+  position: relative;
+  width: 100%;
+  margin-block: 2.0rem;
+}
+
+/* Progress bar container */
+/* Container for the progress bar and percentage label */
+.progress-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligns everything to the left */
+}
+
+/* Progress bar styles */
+.progress-meter {
+  position: relative;
+  height: 10px; /* Adjust thickness */
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 100vw;
+  background: #f3f3f3;
+  overflow: hidden;
+  margin-bottom: 4px; /* Space for percentage label */
+}
+
+/* Progress bar fill with transition */
+.progress-meter .fill {
+  display: block;
+  height: 100%;
+  border-radius: 100vw;
+  transition: width 0.4s ease-in-out;
+}
+
+/* Percentage label correctly positioned BELOW the progress bar */
+.percentage-label {
+  font-size: 0.8rem;
+  font-weight: bold;
+  display: block;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-top: 4px; /* Space between bar and text */
+  text-align: left; /* Ensures alignment to the left */
+}
+
+
+.pot-stat {
+  font-size: 12px; /* Reduce size of total saved and target text */
+  font-weight: 400; /* Make it thinner */
+  color: #333;
+}
+
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.button-group button {
+  padding: 4px 10px;  /* Reduce padding to make the button smaller */
+  font-size: 12px;  /* Reduce font size */
+  min-width: auto;  /* Ensure buttons don’t stretch too much */
+  height: 32px;  /* Adjust button height */
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h3 {
+  margin-bottom: 1rem;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 6px;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-size: 1rem;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.modal-buttons button {
+  flex: 1;
+}

@@ -1,0 +1,28 @@
+.list-container {
+  --_padding: 16px 24px;
+
+  background-color: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+.list-header {
+  background-color: #eee;
+  padding: var(--_padding);
+}
+
+.list-header > h4 {
+  color: #00152999;
+}
+
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list > li {
+  padding: var(--_padding);
+  border-bottom: 1px solid #eee;
+}

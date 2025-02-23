@@ -1,0 +1,51 @@
+.modal {
+  border: 0;
+  margin: 0 auto;
+  border-radius: 12px;
+  padding: 2rem;
+}
+.modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+.modal[open][data-closing="true"] {
+  animation: slideUp 0.4s ease forwards;
+}
+
+.modal[open] {
+  animation: slideDown 0.4s ease forwards;
+}
+
+
+@keyframes slideDown {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(5rem);
+    }
+}
+
+@keyframes slideUp {
+    0% {
+      transform: translateY(5rem);
+    }
+    100% {
+      transform: translateY(-100%);
+    }
+}
+
+.modal-header {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 2rem;
+}
+
+.modal-footer {
+  border-top: 1px solid #eee;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  display: flex;
+  gap: 1rem;
+}

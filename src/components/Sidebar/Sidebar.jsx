@@ -101,7 +101,7 @@ export default function Sidebar({ onPageChange }) {
 					</button>
 				</li>
 				<li role='presentation'>
-					<button className='nav-btn' aria-controls='transactions' role='tab' aria-selected="false" tabIndex="-1">
+					<button id='tab-2' className='nav-btn' aria-controls='transactions' role='tab' aria-selected="false" tabIndex="-1">
             <svg
 							xmlns='http://www.w3.org/2000/svg'
 							viewBox='0 -960 960 960'
@@ -113,7 +113,7 @@ export default function Sidebar({ onPageChange }) {
 					</button>
 				</li>
 				<li role='presentation'>
-					<button className='nav-btn' aria-controls='budgets' role='tab' aria-selected="false" tabIndex="-1">
+					<button id='tab-2' className='nav-btn' aria-controls='budgets' role='tab' aria-selected="false" tabIndex="-1">
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
 							className='bi bi-pie-chart-fill'
@@ -125,7 +125,7 @@ export default function Sidebar({ onPageChange }) {
 					</button>
 				</li>
 				<li role='presentation'>
-					<button className='nav-btn' aria-controls='pots' role='tab' aria-selected="false" tabIndex="-1">
+					<button id='tab-4' className='nav-btn' aria-controls='pots' role='tab' aria-selected="false" tabIndex="-1">
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
 							className='bi bi-cash-coin'
@@ -143,7 +143,7 @@ export default function Sidebar({ onPageChange }) {
 					</button>
 				</li>
 				<li role='presentation'>
-					<button className='nav-btn' aria-controls='bills' role='tab' aria-selected="false" tabIndex="-1">
+					<button id='tab-5' className='nav-btn' aria-controls='bills' role='tab' aria-selected="false" tabIndex="-1">
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
 							className='bi bi-receipt'

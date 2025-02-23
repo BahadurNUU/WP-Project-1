@@ -22,7 +22,7 @@ export function FinanceContextProvider({ children }) {
   }, [])
 
   return (
-    <FinanceContext.Provider value={{ data, loaded }}> { children } </FinanceContext.Provider>
+    <FinanceContext.Provider value={{ data, loaded, setData }}> { children } </FinanceContext.Provider>
   )
 }
 
