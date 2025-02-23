@@ -157,22 +157,50 @@ export default function PotsPage() {
       </div>
 
       {moneyModal.visible && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h3>Enter amount to {moneyModal.type}</h3>
-            <input
-              type="number"
-              value={moneyAmount}
-              onChange={(e) => setMoneyAmount(e.target.value)}
-              placeholder="Amount"
-            />
-            <div className="modal-buttons">
-              <Button type="primary" onClick={handleMoneyChange} className="hover-effect color-change">Confirm</Button>
-              <Button type="secondary" onClick={() => setMoneyModal({ visible: false, type: "", potId: null })} className="hover-effect color-change">Cancel</Button>
-            </div>
-          </div>
+  <div className="modal-overlay">
+    <div className="modal-content">
+      {/** Get the pot name dynamically */}
+      <h3>Add to '{data.pots.find(pot => pot.id === moneyModal.potId)?.name || "Pot"}'</h3>
+      
+      <p>
+        <small>
+        Add money to your pot to keep it separate from your main balance. As soon as you add this money, it will be deducted from your current balance.
+        </small>
+      </p>
+      
+      <div className="progress-container">
+        <div className="progress-bar">
+          <div
+            className="progress-fill"
+            style={{ width: `${(data.pots.find(pot => pot.id === moneyModal.potId)?.total || 0) * 100 / (data.pots.find(pot => pot.id === moneyModal.potId)?.target || 1)}%`,paddingTop:"0.5rem" }}
+          ></div>
         </div>
-      )}
+      </div>
+
+      <label ><small>Amount to Add:</small></label>
+      <input className="input-add"
+        type="number"
+        value={moneyAmount}
+        onChange={(e) => setMoneyAmount(e.target.value)}
+        placeholder="e.g. 2000"
+      />
+      <span className="progress-target" style={{float:"right"}}>
+          <small><small>Target of ${data.pots.find(pot => pot.id === moneyModal.potId)?.target || 0}</small></small>
+      </span>
+      <div className="clr" style={{clear:"both"}}></div>
+
+      <div className="modal-buttons">
+        <Button type="primary" onClick={handleMoneyChange} className="hover-effect color-change">
+          Confirm 
+        </Button>
+        <Button type="secondary" onClick={() => setMoneyModal({ visible: false, type: "", potId: null })} className="hover-effect color-change">
+          Cancel
+        </Button>
+      </div>
+    </div>
+  </div>
+)}
+
     </div>
   );
 }
