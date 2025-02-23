@@ -12,12 +12,13 @@ function App() {
   const { loaded } = useFinanceData()
   const [page, setPage] = useState('overview')
 
+
   const content = {
-    overview: <OverviewPage/>,
+    overview: <OverviewPage />,
     transactions: <TransactionsPage />,
     budgets: <BudgetsPage />,
     pots: <PotsPage />,
-    bills: <BillsPage/>
+    bills: <BillsPage />
   }
 
   /** TODO:
@@ -28,9 +29,9 @@ function App() {
 
   return (
     <div className='container'>
-      <Sidebar onPageChange={setPage}/>
+      <Sidebar onPageChange={setPage} />
       <main>
-        { loaded ? (content[page]) : <h1>Loading...</h1> }
+        {loaded ? (content[page]) : <h1>Loading...</h1>}
       </main>
     </div>
   )

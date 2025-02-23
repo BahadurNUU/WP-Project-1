@@ -1,0 +1,65 @@
+.bills-page {
+  padding: 20px;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+}
+
+h2 {
+  color: #333;
+}
+
+.summary {
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.search-sort {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.bills-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.bill-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.bill-title {
+  font-weight: bold;
+}
+
+.bill-date {
+  color: #666;
+}
+
+.bill-amount {
+  font-weight: bold;
+  color: #333;
+}
+
+.due-soon {
+  color: red;
+}
