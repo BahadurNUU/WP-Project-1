@@ -6,10 +6,10 @@ import Label from '../../components/Label/Label'
 import Modal from '../../components/Modal/Modal'
 import { getRandomHexColor } from '../../utils'
 import { useFinanceData } from '../../context/FinanceContext'
-import { PieChart, Pie, Legend, Cell } from 'recharts'
+import { PieChart, Pie, Legend, Cell }  from 'recharts'
 import './BudgetsPage.css'
 
-export default function BudgetsPage() {
+export default function  BudgetsPage() {
   const { data, setData } = useFinanceData()
   const [showModal, setShowModal] = useState(false)
   const [newBudget, setNewBudget] = useState({
