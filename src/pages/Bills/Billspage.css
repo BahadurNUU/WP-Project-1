@@ -2,41 +2,57 @@
   padding: 20px;
   background-color: #f9f9f9;
   font-family: Arial, sans-serif;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Fade-in effect */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 h2 {
   color: #333;
+  text-align: center;
+  transition: color 0.3s;
 }
 
-.summary {
-  margin-bottom: 20px;
-  font-size: 18px;
-  font-weight: bold;
+h2:hover {
+  color: #007bff;
 }
 
-.search-sort {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
+/* Card Animation */
+.summary-card {
+  transition: transform 0.3s ease-in-out;
 }
 
-input[type="text"] {
+.summary-card:hover {
+  transform: scale(1.02);
+}
+
+/* Input and Select Styling */
+.search-sort input,
+.search-sort select {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  transition: all 0.3s ease;
 }
 
-select {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+.search-sort input:focus,
+.search-sort select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 }
 
-.bills-list {
-  list-style-type: none;
-  padding: 0;
-}
-
+/* Bill Item Animation */
 .bill-item {
   display: flex;
   justify-content: space-between;
@@ -45,21 +61,52 @@ select {
   border-radius: 5px;
   margin-bottom: 10px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  animation: fadeInUp 0.5s ease-in-out forwards;
 }
 
-.bill-title {
-  font-weight: bold;
+/* Sorting animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.bill-date {
-  color: #666;
+.bill-item:hover {
+  transform: scale(1.03);
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
 }
 
+/* Bill Amount Label */
 .bill-amount {
   font-weight: bold;
   color: #333;
+  transition: color 0.3s;
 }
 
+.bill-amount:hover {
+  color: #ff4500;
+}
+
+/* Due Soon Color Effect */
 .due-soon {
   color: red;
+  animation: blink 1.5s infinite alternate;
+}
+
+@keyframes blink {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0.5;
+  }
 }
