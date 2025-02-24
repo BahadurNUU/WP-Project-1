@@ -29,7 +29,7 @@ export default function PotsPage() {
         }
         return pot;
       })
-    }));
+    })); 
 
     setMoneyModal({ visible: false, type: "", potId: null });
     setMoneyAmount("");
@@ -73,7 +73,7 @@ export default function PotsPage() {
 
       {isAddingPot && (
         <div className="modal-overlay">
-          <div className="modal-content">
+          <div className="modal-content1">
             <h1>+Add New Pot</h1>
             <p className="modal-description">
               <small>
