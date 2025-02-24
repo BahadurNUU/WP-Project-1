@@ -12,8 +12,6 @@ export default function BillsPage() {
   const [sortOrder, setSortOrder] = useState('latest');
   const [error, setError] = useState(null);
 
-
-
   const filteredSortedBills = useMemo(() => {
     return [...bills]
       .filter((bill) =>
@@ -37,42 +35,56 @@ export default function BillsPage() {
     <div className="bills-page">
       <h2>Recurring Bills</h2>
       {error && <p className="error-message">{error}</p>}
-      <div className="summary-card">
-        <Card title="Total Bills">
-          <p className="total-amount">
-            ${bills.reduce((acc, bill) => acc + (bill.amount || 0), 0).toFixed(2)}
-          </p>
-        </Card>
+      <div className="bills-container">
+        <div className="bill-list-card">
+          <div className="search-sort">
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Search bills"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <select className="sort-dropdown" onChange={(e) => setSortOrder(e.target.value)} value={sortOrder}>
+              <option value="latest">Sort by: Latest</option>
+              <option value="earliest">Sort by: Earliest</option>
+              <option value="name-asc">Sort by: A to Z</option>
+              <option value="name-desc">Sort by: Z to A</option>
+            </select>
+          </div>
+          <Card title="Bills List">
+            <ul className="bills-list">
+              <li className="bills-header">
+                <span className="bill-title">Bill Title</span>
+                <span className="bill-date">Due Date</span>
+                <span className="bill-amount">Amount</span>
+              </li>
+              {filteredSortedBills.map((bill, index) => (
+                <li key={index} className={`bill-item ${bill.dueSoon ? 'due-soon' : ''}`}>
+                  <span className="bill-title">{bill.title}</span>
+                  <span className="bill-date">{bill.dueDate}</span>
+                  <Label
+                    text={`$${(bill.amount || 0).toFixed(2)}`}
+                    type={bill.dueSoon ? 'primary' : 'secondary'}
+                  />
+                </li>
+              ))}
+            </ul>
+          </Card>
+        </div>
+        <div className="summary-card">
+          <Card title="Total Bills" className="total-bills-card">
+            <p className="total-amount">
+              ${bills.reduce((acc, bill) => acc + (bill.amount || 0), 0).toFixed(2)}
+            </p>
+          </Card>
+          <Card title="Summary" className="summary-details">
+            <p><strong>Paid Bills:</strong> {bills.filter(b => b.paid).length} (${bills.filter(b => b.paid).reduce((acc, b) => acc + (b.amount || 0), 0).toFixed(2)})</p>
+            <p><strong>Total Upcoming:</strong> {bills.filter(b => !b.paid).length} (${bills.filter(b => !b.paid).reduce((acc, b) => acc + (b.amount || 0), 0).toFixed(2)})</p>
+            <p className="due-soon"><strong>Due Soon:</strong> {bills.filter(b => b.dueSoon).length} (${bills.filter(b => b.dueSoon).reduce((acc, b) => acc + (b.amount || 0), 0).toFixed(2)})</p>
+          </Card>
+        </div>
       </div>
-      <div className="search-sort">
-        <input
-          type="text"
-          placeholder="Search bills"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <select onChange={(e) => setSortOrder(e.target.value)} value={sortOrder}>
-          <option value="latest">Latest</option>
-          <option value="earliest">Earliest</option>
-          <option value="name-asc">A to Z</option>
-          <option value="name-desc">Z to A</option>
-        </select>
-      </div>
-      <Card title="Bills List">
-        <List
-          data={filteredSortedBills}
-          render={(bill, index) => (
-            <li key={index} className={`bill-item ${bill.dueSoon ? 'due-soon' : ''}`}>
-              <span className="bill-title">{bill.title}</span>
-              <span className="bill-date">{bill.dueDate}</span>
-              <Label
-                text={`$${(bill.amount || 0).toFixed(2)}`}
-                type={bill.dueSoon ? 'primary' : 'secondary'}
-              />
-            </li>
-          )}
-        />
-      </Card>
     </div>
   );
 }
