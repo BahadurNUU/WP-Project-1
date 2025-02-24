@@ -73,7 +73,7 @@ export default function PotsPage() {
 
       {isAddingPot && (
         <div className="modal-overlay">
-          <div className="modal-content1">
+          <div className="modal-content">
             <h1>+Add New Pot</h1>
             <p className="modal-description">
               <small>
