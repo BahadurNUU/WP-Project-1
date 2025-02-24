@@ -6,30 +6,13 @@ import "./Billspage.css";
 import { useFinanceData } from '../../context/FinanceContext';
 
 export default function BillsPage() {
-  const { data: contextData } = useFinanceData();
+  const { data } = useFinanceData();
   const [bills, setBills] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOrder, setSortOrder] = useState('latest');
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    if (contextData && contextData.length > 0) {
-      setBills(contextData);
-    } else {
-      fetch('/data/data.json')
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Failed to fetch bills data');
-          }
-          return response.json();
-        })
-        .then((data) => setBills(data))
-        .catch((error) => {
-          console.error('Error loading bills:', error);
-          setError('Failed to load bills. Please try again later.');
-        });
-    }
-  }, [contextData]);
+
 
   const filteredSortedBills = useMemo(() => {
     return [...bills]
