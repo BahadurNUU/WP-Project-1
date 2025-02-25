@@ -5,18 +5,18 @@ import { useFinanceData } from "../../context/FinanceContext";
 import "./PotsPage.css";
 
 export default function PotsPage() {
-  const { data, setData } = useFinanceData(); // Access and update finance data from context
-  const [isAddingPot, setIsAddingPot] = useState(false); // State to control the visibility of the add pot modal
-  const [newPotName, setNewPotName] = useState(""); // State to store the new pot name
-  const [newPotTarget, setNewPotTarget] = useState(""); // State to store the new pot target
-  const [moneyModal, setMoneyModal] = useState({ visible: false, type: "", potId: null }); // State to control the money modal (add/withdraw)
-  const [moneyAmount, setMoneyAmount] = useState(""); // State to store the amount to add/withdraw
+  const { data, setData } = useFinanceData();
+  const [isAddingPot, setIsAddingPot] = useState(false); 
+  const [newPotName, setNewPotName] = useState("");
+  const [newPotTarget, setNewPotTarget] = useState(""); 
+  const [moneyModal, setMoneyModal] = useState({ visible: false, type: "", potId: null }); 
+  const [moneyAmount, setMoneyAmount] = useState(""); 
 
   // Function to handle adding or withdrawing money from a pot
   const handleMoneyChange = () => {
     const { potId, type } = moneyModal;
     const amount = parseFloat(moneyAmount);
-    if (isNaN(amount) || amount <= 0) return; // Validate the amount
+    if (isNaN(amount) || amount <= 0) return; 
 
     setData((prevData) => ({
       ...prevData,
@@ -32,8 +32,8 @@ export default function PotsPage() {
       })
     })); 
 
-    setMoneyModal({ visible: false, type: "", potId: null }); // Close the modal
-    setMoneyAmount(""); // Reset the amount input
+    setMoneyModal({ visible: false, type: "", potId: null }); 
+    setMoneyAmount(""); 
   };
 
   // Function to open the money modal for a specific pot
@@ -48,24 +48,24 @@ export default function PotsPage() {
 
   // Function to confirm and add the new pot
   const confirmNewPot = () => {
-    if (!newPotName.trim() || isNaN(newPotTarget) || newPotTarget <= 0) return; // Validate inputs
+    if (!newPotName.trim() || isNaN(newPotTarget) || newPotTarget <= 0) return; 
     const newPot = {
-      id: Date.now(), // Generate a unique ID
+      id: Date.now(), 
       name: newPotName,
       total: 0,
       target: Number(newPotTarget),
     };
-    setData((prevData) => ({ ...prevData, pots: [...prevData.pots, newPot] })); // Add the new pot to the data
-    setNewPotName(""); // Reset the pot name input
-    setNewPotTarget(""); // Reset the pot target input
-    setIsAddingPot(false); // Close the modal
+    setData((prevData) => ({ ...prevData, pots: [...prevData.pots, newPot] })); 
+    setNewPotName(""); 
+    setNewPotTarget(""); 
+    setIsAddingPot(false); 
   };
 
   // Function to delete a pot
   const deletePot = (potId) => {
     setData((prevData) => ({
       ...prevData,
-      pots: prevData.pots.filter((pot) => pot.id !== potId), // Remove the pot from the data
+      pots: prevData.pots.filter((pot) => pot.id !== potId), 
     }));
   };
 
@@ -119,9 +119,9 @@ export default function PotsPage() {
 
           // Function to determine the progress bar color based on the percentage
           const getColor = (percentage) => {
-            if (percentage < 30) return "#FF6347"; // Red for less than 30%
-            if (percentage < 70) return "#FFD700"; // Yellow for less than 70%
-            return "#32CD32"; // Green for 70% and above
+            if (percentage < 30) return "#FF6347"; 
+            if (percentage < 70) return "#FFD700";
+            return "#32CD32"; 
           };
 
           return (
