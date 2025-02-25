@@ -13,7 +13,7 @@ export default function BillsPage() {
   const [sortOrder, setSortOrder] = useState("latest");
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const billsPerPage = 5; // Number of bills per page
+  const billsPerPage = 5;
 
   // useEffect to process and store bills when data changes
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function BillsPage() {
             dueSoon: dueSoon,
             paid: paid,
             recurring: t.recurring,
-            dayValue: day, // Storing numeric day for sorting
+            dayValue: day, 
           };
         });
 

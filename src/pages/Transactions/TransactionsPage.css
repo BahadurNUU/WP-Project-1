@@ -49,12 +49,12 @@ h2 {
 }
 
 /* Search Bar */
-.search-bar {
+.Tsearch-bar {
   position: relative;
   width: 250px;
 }
 
-.search-bar input {
+.Tsearch-bar input {
   width: 100%;
   padding: 10px 36px 10px 12px;
   border-radius: 8px;
@@ -62,12 +62,12 @@ h2 {
   outline: none;
 }
 
-.search-bar input:focus {
+.Tsearch-bar input:focus {
   border-color: #2c3d4f;
   box-shadow: 0 0 6px rgba(0, 91, 187, 0.5);
 }
 
-.search-icon {
+.Tsearch-icon {
   position: absolute;
   right: 12px;
   top: 0;

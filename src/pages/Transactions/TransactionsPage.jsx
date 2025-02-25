@@ -81,14 +81,14 @@ const TransactionsPage = () => {
       {/* Search & Filters Section */}
       <div className="filters">
         {/* Search Bar */}
-        <div className="search-bar">
+        <div className="Tsearch-bar">
           <input
             type="text"
             placeholder="Search transaction..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <svg className="search-icon" viewBox="0 0 16 16" fill="currentColor">
+          <svg className="Tsearch-icon" viewBox="0 0 16 16" fill="currentColor">
             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398l3.85 3.85 1.06-1.06-3.85-3.85zM6.5 11a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z" />
           </svg>
         </div>
