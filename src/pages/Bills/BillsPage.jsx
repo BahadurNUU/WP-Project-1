@@ -1,17 +1,40 @@
-import { useState, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Card from "../../components/Card/Card";
-import Label from "../../components/Label/Label";
 import "./Billspage.css";
 import { useFinanceData } from "../../context/FinanceContext";
 
 export default function BillsPage() {
-  const { data } = useFinanceData();
+  const { data, loaded } = useFinanceData();
   const [bills, setBills] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOrder, setSortOrder] = useState("latest");
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const billsPerPage = 5; // Pagination limit
 
-  // Computed totals
+
+  useEffect(() => {
+    if (data?.transactions) {
+      const billTransactions = data.transactions
+        .filter((t) => t.category === "Bills")
+        .map((t) => {
+          const dueDate = new Date(t.date);
+          const today = new Date();
+          const dueSoon = dueDate > today && dueDate <= new Date(today.setDate(today.getDate() + 7));
+          return {
+            title: t.name,
+            dueDate: dueDate.toISOString().split("T")[0],
+            amount: Math.abs(t.amount),
+            dueSoon: dueSoon,
+            paid: false,
+          };
+        });
+
+      setBills(billTransactions);
+    }
+  }, [data]);
+
+
   const paidBillsTotal = useMemo(
     () => bills.filter((bill) => bill.paid).reduce((acc, bill) => acc + bill.amount, 0),
     [bills]
@@ -27,7 +50,7 @@ export default function BillsPage() {
     [bills]
   );
 
-  // Filter and sort bills
+
   const filteredSortedBills = useMemo(() => {
     return [...bills]
       .filter((bill) =>
@@ -46,6 +69,13 @@ export default function BillsPage() {
         return 0;
       });
   }, [bills, searchQuery, sortOrder]);
+
+
+  const totalPages = Math.ceil(filteredSortedBills.length / billsPerPage);
+  const displayedBills = filteredSortedBills.slice(
+    (currentPage - 1) * billsPerPage,
+    currentPage * billsPerPage
+  );
 
   return (
     <div className="bills-page">
@@ -79,7 +109,7 @@ export default function BillsPage() {
       </div>
 
       <div className="content-layout">
-        {/* Left Side: Bills List */}
+
         <div className="bill-list-card">
           <Card title="Bills List">
             <table className="bills-table">
@@ -91,23 +121,47 @@ export default function BillsPage() {
                 </tr>
               </thead>
               <tbody>
-                {filteredSortedBills.map((bill, index) => (
-                  <tr key={index} className={bill.dueSoon ? "due-soon" : ""}>
-                    <td>{bill.title}</td>
-                    <td>{bill.dueDate}</td>
-                    <td className={bill.dueSoon ? "highlight" : ""}>
-                      ${bill.amount.toFixed(2)}
-                    </td>
+                {displayedBills.length > 0 ? (
+                  displayedBills.map((bill, index) => (
+                    <tr key={index} className={bill.dueSoon ? "due-soon" : ""}>
+                      <td>{bill.title}</td>
+                      <td>{bill.dueDate}</td>
+                      <td className={bill.dueSoon ? "highlight" : ""}>
+                        ${bill.amount.toFixed(2)}
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="3" className="no-bills">No bills found</td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
           </Card>
+
+          {/* Pagination */}
+          <div className="pagination">
+            <button
+              className="pagination-btn"
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage(currentPage - 1)}
+            >
+              ← Previous
+            </button>
+            <span>Page {currentPage} of {totalPages}</span>
+            <button
+              className="pagination-btn"
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage(currentPage + 1)}
+            >
+              Next →
+            </button>
+          </div>
         </div>
 
-        {/* Right Side: Total Bills & Summary */}
+        { }
         <div className="right-panel">
-
           <div className="total-bills-card">
             <Card title="Total Bills">
               <p className="total-amount">
@@ -116,7 +170,7 @@ export default function BillsPage() {
             </Card>
           </div>
 
-          {/* Summary Section */}
+          { }
           <div className="summary-section">
             <Card title="Summary">
               <div className="summary-details">
