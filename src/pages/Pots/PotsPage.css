@@ -1,3 +1,4 @@
+/* Grid layout for the pots container */
 #pots-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -5,38 +6,45 @@
   margin-top: 2rem;
 }
 
+/* Flex layout for pot details */
 .pot-details {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1rem;
 }
 
+/* Flex layout for pot statistics */
 .pot-stat {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
 }
 
+/* Gray text styling */
 .txt-gray {
   color: #7a7a7a;
 }
 
+/* Large text styling */
 .txt-size-xl {
   font-size: 1.25rem;
 }
 
+/* Progress meter container */
 .progress-meter-container {
   position: relative;
   width: 100%;
   margin-block: 2.0rem;
 }
 
+/* Flex layout for progress container */
 .progress-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
+/* Progress meter styling */
 .progress-meter {
   position: relative;
   height: 10px;
@@ -48,6 +56,7 @@
   margin-bottom: 4px;
 }
 
+/* Progress fill styling */
 .progress-meter .fill {
   display: block;
   height: 100%;
@@ -55,6 +64,7 @@
   transition: width 0.4s ease-in-out;
 }
 
+/* Percentage label styling */
 .percentage-label {
   font-size: 0.8rem;
   font-weight: bold;
@@ -64,11 +74,13 @@
   text-align: left;
 }
 
+/* Button group layout */
 #pots .button-group {
   display: flex;
   gap: 1rem;
 }
 
+/* Button styling */
 .button-group button {
   padding: 4px 10px;
   font-size: 12px;
@@ -77,6 +89,7 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+/* Modal styling */
 #pots .modal {
   position: fixed;
   top: 0;
@@ -91,11 +104,13 @@
   animation: fadeIn 0.3s ease-in-out;
 }
 
+/* Fade-out animation for modal */
 .modal.fade-out {
   animation: fadeOut 0.3s ease-in-out forwards;
 }
 
- #pots .modal-content {
+/* Modal content styling */
+#pots .modal-content {
   background: white;
   padding: 2rem;
   border-radius: 8px;
@@ -107,15 +122,13 @@
   animation: fadeIn 0.3s ease-in-out;
 }
 
-.modal-content h3 {
-  margin-bottom: 1rem;
-}
-
+/* Modal description styling */
 .modal-description {
   margin-bottom: 1rem;
   margin-top: 1rem;
 }
 
+/* Modal label styling */
 .modal-label {
   margin-bottom: 3rem;
   font-size: 1.2rem;
@@ -124,6 +137,7 @@
   margin-bottom: 0.5rem;
 }
 
+/* Input styling inside modal */
 #pots .modal-content input {
   width: 100%;
   padding: 6px;
@@ -133,10 +147,12 @@
   font-size: 1rem;
 }
 
+/* Input wrapper styling */
 .input-wrapper {
   position: relative;
 }
 
+/* Modal buttons layout */
 .modal-buttons {
   display: flex;
   gap: 1rem;
@@ -144,6 +160,7 @@
   margin-top: 1rem;
 }
 
+/* Modal button styling */
 .modal-buttons button {
   flex: 1;
   padding: 10px;
@@ -153,6 +170,7 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+/* Input styling for add money modal */
 #pots .input-add {
   height: 50px;
   padding: 10px;
@@ -160,6 +178,7 @@
   border-radius: 5px;
 }
 
+/* Input styling for modal */
 #pots .modal-input {
   height: 50px;
   padding: 10px;
@@ -167,6 +186,7 @@
   border-radius: 5px;
 }
 
+/* Hover effect for modal buttons */
 #pots .modal-buttons button:hover {
   background-color: white;
   transform: translateY(-2px);
@@ -174,6 +194,7 @@
   color: black;
 }
 
+/* Primary modal button styling */
 #pots .primary-modal-btn {
   width: 100%;
   padding: 12px;
@@ -186,6 +207,7 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+/* Hover effect for primary modal button */
 #pots .primary-modal-btn:hover {
   background: #333;
   color: black;
@@ -193,22 +215,26 @@
   border: 1px solid black;
 }
 
+/* Cancel button styling */
 .cancel-btn {
   background: #ddd;
   color: black;
 }
 
+/* Hover effect for cancel button */
 .cancel-btn:hover {
   background: #bbb;
   transform: scale(1.05);
 }
 
+/* Clearfix utility */
 .clr {
   margin: 0;
   padding: 0;
   clear: both;
 }
 
+/* Fade-in animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -220,6 +246,7 @@
   }
 }
 
+/* Fade-out animation */
 @keyframes fadeOut {
   from {
     opacity: 1;

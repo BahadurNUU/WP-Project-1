@@ -5,62 +5,67 @@ import { useFinanceData } from "../../context/FinanceContext";
 import "./PotsPage.css";
 
 export default function PotsPage() {
-  const { data, setData } = useFinanceData();
-  const [isAddingPot, setIsAddingPot] = useState(false);
-  const [newPotName, setNewPotName] = useState("");
-  const [newPotTarget, setNewPotTarget] = useState("");
-  const [moneyModal, setMoneyModal] = useState({ visible: false, type: "", potId: null });
-  const [moneyAmount, setMoneyAmount] = useState("");
+  const { data, setData } = useFinanceData(); // Access and update finance data from context
+  const [isAddingPot, setIsAddingPot] = useState(false); // State to control the visibility of the add pot modal
+  const [newPotName, setNewPotName] = useState(""); // State to store the new pot name
+  const [newPotTarget, setNewPotTarget] = useState(""); // State to store the new pot target
+  const [moneyModal, setMoneyModal] = useState({ visible: false, type: "", potId: null }); // State to control the money modal (add/withdraw)
+  const [moneyAmount, setMoneyAmount] = useState(""); // State to store the amount to add/withdraw
 
+  // Function to handle adding or withdrawing money from a pot
   const handleMoneyChange = () => {
     const { potId, type } = moneyModal;
     const amount = parseFloat(moneyAmount);
-    if (isNaN(amount) || amount <= 0) return;
-    
+    if (isNaN(amount) || amount <= 0) return; // Validate the amount
+
     setData((prevData) => ({
       ...prevData,
       pots: prevData.pots.map((pot) => {
         if (pot.id === potId) {
           if (type === "add") {
-            return { ...pot, total: pot.total + amount };
+            return { ...pot, total: pot.total + amount }; // Add money to the pot
           } else if (type === "withdraw" && pot.total >= amount) {
-            return { ...pot, total: pot.total - amount };
+            return { ...pot, total: pot.total - amount }; // Withdraw money from the pot
           }
         }
         return pot;
       })
     })); 
 
-    setMoneyModal({ visible: false, type: "", potId: null });
-    setMoneyAmount("");
+    setMoneyModal({ visible: false, type: "", potId: null }); // Close the modal
+    setMoneyAmount(""); // Reset the amount input
   };
 
+  // Function to open the money modal for a specific pot
   const openMoneyModal = (id, type) => {
     setMoneyModal({ visible: true, type, potId: id });
   };
 
+  // Function to add a new pot
   const addNewPot = () => {
     setIsAddingPot(true);
   };
 
+  // Function to confirm and add the new pot
   const confirmNewPot = () => {
-    if (!newPotName.trim() || isNaN(newPotTarget) || newPotTarget <= 0) return;
+    if (!newPotName.trim() || isNaN(newPotTarget) || newPotTarget <= 0) return; // Validate inputs
     const newPot = {
-      id: Date.now(),
+      id: Date.now(), // Generate a unique ID
       name: newPotName,
       total: 0,
       target: Number(newPotTarget),
     };
-    setData((prevData) => ({ ...prevData, pots: [...prevData.pots, newPot] }));
-    setNewPotName("");
-    setNewPotTarget("");
-    setIsAddingPot(false);
+    setData((prevData) => ({ ...prevData, pots: [...prevData.pots, newPot] })); // Add the new pot to the data
+    setNewPotName(""); // Reset the pot name input
+    setNewPotTarget(""); // Reset the pot target input
+    setIsAddingPot(false); // Close the modal
   };
 
+  // Function to delete a pot
   const deletePot = (potId) => {
     setData((prevData) => ({
       ...prevData,
-      pots: prevData.pots.filter((pot) => pot.id !== potId),
+      pots: prevData.pots.filter((pot) => pot.id !== potId), // Remove the pot from the data
     }));
   };
 
@@ -71,6 +76,7 @@ export default function PotsPage() {
         <Button type="primary" onClick={addNewPot} className="hover-effect color-change">+Add New Pot</Button>
       </div>
 
+      {/* Modal for adding a new pot */}
       {isAddingPot && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -106,14 +112,16 @@ export default function PotsPage() {
         </div>
       )}
 
+      {/* Display all pots */}
       <div id="pots-container">
         {data.pots.map((pot) => {
-          const percentage = (pot.total * 100) / pot.target;
+          const percentage = (pot.total * 100) / pot.target; // Calculate the percentage of the target achieved
 
+          // Function to determine the progress bar color based on the percentage
           const getColor = (percentage) => {
-            if (percentage < 30) return "#FF6347";
-            if (percentage < 70) return "#FFD700";
-            return "#32CD32";
+            if (percentage < 30) return "#FF6347"; // Red for less than 30%
+            if (percentage < 70) return "#FFD700"; // Yellow for less than 70%
+            return "#32CD32"; // Green for 70% and above
           };
 
           return (
@@ -129,6 +137,7 @@ export default function PotsPage() {
                 </div>
               </div>
 
+              {/* Progress bar */}
               <div
                 role="meter"
                 aria-valuenow={pot.total}
@@ -147,6 +156,7 @@ export default function PotsPage() {
               </div>
               <div className="percentage-label">{percentage.toFixed(0)}%</div>
 
+              {/* Buttons for adding/withdrawing money and deleting the pot */}
               <div className="button-group">
                 <Button onClick={() => openMoneyModal(pot.id, "add")} className="hover-effect color-change">Add money</Button>
                 <Button type="secondary" onClick={() => openMoneyModal(pot.id, "withdraw")} className="hover-effect color-change">Withdraw money</Button>
@@ -157,6 +167,7 @@ export default function PotsPage() {
         })}
       </div>
 
+      {/* Modal for adding/withdrawing money */}
       {moneyModal.visible && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -174,6 +185,7 @@ export default function PotsPage() {
               </small>
             </p>
 
+            {/* Progress bar */}
             <div className="progress-container">
               <div className="progress-bar">
                 <div

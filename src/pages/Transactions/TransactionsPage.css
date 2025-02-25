@@ -1,8 +1,8 @@
 h2 {
-  color: #222;
-  font-size: 22px;
+  color: #1f2a3b;
+  font-size: 24px; 
   font-weight: bold;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 /* Transactions Header */
@@ -10,7 +10,7 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 24px; 
 }
 
 /* Add Transaction Button */
@@ -23,11 +23,13 @@ h2 {
   font-weight: bold;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.1s ease;
+  transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
 }
 
 .add-transaction-btn:hover {
   background: #1f2a3b;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: scale(1.02);
 }
 
 .add-transaction-btn:active {
@@ -40,9 +42,9 @@ h2 {
   justify-content: space-between;
   align-items: center;
   background: white;
-  padding: 16px;
+  padding: 20px;
   border-radius: 12px;
-  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   flex-wrap: wrap;
 }
 
@@ -68,13 +70,15 @@ h2 {
 .search-icon {
   position: absolute;
   right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 0;
+  bottom: 0;
+  margin: auto;
   width: 18px;
   height: 18px;
   fill: #2c3d4f;
   cursor: pointer;
   transition: transform 0.2s ease;
+  pointer-events: none;
 }
 
 /* Dropdown Filters */
@@ -91,8 +95,8 @@ h2 {
 }
 
 .dropdown label {
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: bold;
   margin-bottom: 4px;
   color: #444;
 }
@@ -105,6 +109,10 @@ h2 {
   background-color: white;
   cursor: pointer;
   transition: 0.2s;
+}
+
+.dropdown select:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Transactions Table */
@@ -125,11 +133,6 @@ th {
   font-weight: bold;
   color: #444;
 }
-
-th:nth-child(1), td:nth-child(1) { width: 25%; min-width: 150px; } 
-th:nth-child(2), td:nth-child(2) { width: 20%; min-width: 120px; } 
-th:nth-child(3), td:nth-child(3) { width: 20%; min-width: 120px; text-align: center; } 
-th:nth-child(4), td:nth-child(4) { width: 15%; min-width: 100px; text-align: center; } 
 
 td {
   padding: 16px 14px;
@@ -177,16 +180,18 @@ tr:hover {
   transition: all 0.2s;
 }
 
+.pagination button:hover {
+  background: #c5c9d1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+}
+
 .pagination .active {
   background: #2c3d4f;
   color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.pagination button:hover {
-  background: #c5c9d1;
-}
-
-/* Pagination Arrows */
 .arrow-button {
   background: #ccc;
 }

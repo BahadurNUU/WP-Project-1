@@ -4,16 +4,22 @@ import TransactionsModal from "./TransactionsModal";
 import "./TransactionsPage.css";
 
 const TransactionsPage = () => {
+  // State to store all transactions and filtered transactions
   const { data, loaded } = useFinanceData();
   const [transactions, setTransactions] = useState([]);
   const [filteredTransactions, setFilteredTransactions] = useState([]);
+
+  // State for search, category filter, sorting, pagination, and modal visibility
   const [searchTerm, setSearchTerm] = useState("");
   const [category, setCategory] = useState("All Transactions");
   const [sortBy, setSortBy] = useState("Latest");
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Number of transactions displayed per page
   const transactionsPerPage = 10;
 
+  // Fetch transactions from context when data is loaded
   useEffect(() => {
     if (loaded && data?.transactions) {
       setTransactions(data.transactions);
@@ -21,11 +27,14 @@ const TransactionsPage = () => {
     }
   }, [loaded, data]);
 
+  // Filter, sort, and update transactions whenever relevant state changes
   useEffect(() => {
+    // Filter by search term and category
     let filtered = transactions
       .filter((t) => t.name.toLowerCase().includes(searchTerm.toLowerCase()))
       .filter((t) => category === "All Transactions" || t.category === category);
 
+    // Sorting logic using various criteria
     const sortFunctions = {
       Latest: (a, b) => new Date(b.date) - new Date(a.date),
       Oldest: (a, b) => new Date(a.date) - new Date(b.date),
@@ -35,19 +44,25 @@ const TransactionsPage = () => {
       Lowest: (a, b) => a.amount - b.amount,
     };
 
+    // Apply sorting and update filtered transactions
     setFilteredTransactions(filtered.sort(sortFunctions[sortBy]));
+
+    // Reset to first page when filters/sorting are changed
     setCurrentPage(1);
   }, [transactions, searchTerm, category, sortBy]);
 
+  // Pagination calculations
   const totalPages = Math.ceil(filteredTransactions.length / transactionsPerPage);
   const displayedTransactions = filteredTransactions.slice(
     (currentPage - 1) * transactionsPerPage,
     currentPage * transactionsPerPage
   );
 
+  // Helper function to format date strings to 'DD/MM/YYYY'
   const formatDate = (isoString) =>
     new Date(isoString).toLocaleDateString("en-GB");
 
+  // Add a new transaction and close the modal
   const handleSaveTransaction = (newTransaction) => {
     setTransactions((prev) => [newTransaction, ...prev]);
     setIsModalOpen(false);
@@ -55,7 +70,7 @@ const TransactionsPage = () => {
 
   return (
     <div className="transactions-container">
-      {/* Header */}
+      {/* Header Section */}
       <div className="transactions-header">
         <h2>Transactions</h2>
         <button className="add-transaction-btn" onClick={() => setIsModalOpen(true)}>
@@ -63,7 +78,7 @@ const TransactionsPage = () => {
         </button>
       </div>
 
-      {/* Search & Filters */}
+      {/* Search & Filters Section */}
       <div className="filters">
         {/* Search Bar */}
         <div className="search-bar">
@@ -78,11 +93,21 @@ const TransactionsPage = () => {
           </svg>
         </div>
 
-        {/* Dropdowns */}
+        {/* Dropdowns for Sort and Category Filter */}
         <div className="dropdowns">
           {[
-            { label: "Sort by", value: sortBy, options: ["Latest", "Oldest", "A to Z", "Z to A", "Highest", "Lowest"], setter: setSortBy },
-            { label: "Category", value: category, options: ["All Transactions", "Entertainment", "Bills", "Groceries", "Dining Out", "Transportation", "Personal Care", "Education", "Lifestyle", "Shopping", "General"], setter: setCategory },
+            {
+              label: "Sort by",
+              value: sortBy,
+              options: ["Latest", "Oldest", "A to Z", "Z to A", "Highest", "Lowest"],
+              setter: setSortBy
+            },
+            {
+              label: "Category",
+              value: category,
+              options: ["All Transactions", "Entertainment", "Bills", "Groceries", "Dining Out", "Transportation", "Personal Care", "Education", "Lifestyle", "Shopping", "General"],
+              setter: setCategory
+            }
           ].map(({ label, value, options, setter }) => (
             <div className="dropdown" key={label}>
               <label>{label}</label>
@@ -128,7 +153,7 @@ const TransactionsPage = () => {
         </tbody>
       </table>
 
-      {/* Pagination */}
+      {/* Pagination Controls */}
       <div className="pagination">
         <button className="arrow-button" disabled={currentPage === 1} onClick={() => setCurrentPage((p) => p - 1)}>←</button>
         {[...Array(totalPages)].map((_, i) => (
@@ -139,7 +164,7 @@ const TransactionsPage = () => {
         <button className="arrow-button" disabled={currentPage === totalPages} onClick={() => setCurrentPage((p) => p + 1)}>→</button>
       </div>
 
-      {/* Transactions Modal */}
+      {/* Modal for Adding Transactions */}
       <TransactionsModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSave={handleSaveTransaction} />
     </div>
   );
