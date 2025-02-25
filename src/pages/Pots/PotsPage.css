@@ -95,7 +95,7 @@
   animation: fadeOut 0.3s ease-in-out forwards;
 }
 
- #pots .modal-content1 {
+ #pots .modal-content {
   background: white;
   padding: 2rem;
   border-radius: 8px;
