@@ -1,22 +1,29 @@
 import React, { useState, useRef, useEffect } from "react";
+import PropTypes from "prop-types";
 import "./TransactionsModal.css";
 
 const TransactionsModal = ({ isOpen, onClose, onSave }) => {
-  const [name, setName] = useState("");
-  const [amount, setAmount] = useState("");
-  const [category, setCategory] = useState("");
-  const [date, setDate] = useState("");
+  // Form state management
+  const [formData, setFormData] = useState({
+    name: "",
+    amount: "",
+    category: "",
+    date: ""
+  });
+
+  // UI state management
   const [showDropdown, setShowDropdown] = useState(false);
   const [errors, setErrors] = useState({});
   const dropdownRef = useRef(null);
 
+  // Transaction categories
   const categories = [
     "Entertainment", "Bills", "Groceries", "Dining Out",
     "Transportation", "Personal Care", "Education",
     "Lifestyle", "Shopping", "General"
   ];
 
-  {/* Handle clicks outside dropdown to close it */}
+  // Handle clicks outside dropdown to close it
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -27,25 +34,25 @@ const TransactionsModal = ({ isOpen, onClose, onSave }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  {/* Format date for display */}
+  // Format date to 'MM/DD/YYYY' for consistent input display
   const formatDate = (inputDate) => {
     const dateObj = new Date(inputDate);
     return isNaN(dateObj) ? "" : dateObj.toLocaleDateString("en-US");
   };
 
-  {/* Validate form inputs */}
+  // Validate form inputs
   const validateForm = () => {
     const newErrors = {};
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    const selectedDate = new Date(date);
+    const selectedDate = new Date(formData.date);
     selectedDate.setHours(0, 0, 0, 0);
     const minDate = new Date("2000-01-01");
 
-    if (!name.trim()) newErrors.name = "Transaction name is required.";
-    if (!amount.trim() || isNaN(amount)) newErrors.amount = "Enter a valid amount.";
-    if (!category) newErrors.category = "Please select a category.";
-    if (!date) {
+    if (!formData.name.trim()) newErrors.name = "Transaction name is required.";
+    if (!formData.amount.trim() || isNaN(formData.amount)) newErrors.amount = "Enter a valid amount.";
+    if (!formData.category) newErrors.category = "Please select a category.";
+    if (!formData.date) {
       newErrors.date = "Please select a date.";
     } else if (selectedDate > today) {
       newErrors.date = "Future dates are not allowed.";
@@ -57,26 +64,28 @@ const TransactionsModal = ({ isOpen, onClose, onSave }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  {/* Handle form submission */}
+  // Handle form submission and save the transaction
   const handleSubmit = () => {
     if (!validateForm()) return;
 
     onSave({ 
-      name, 
-      amount: parseFloat(amount), 
-      category, 
-      date: formatDate(date) 
+      name: formData.name, 
+      amount: parseFloat(formData.amount), 
+      category: formData.category, 
+      date: formatDate(formData.date) 
     });
 
     handleClose();  
   };
 
-  {/* Reset form and close modal */}
+  // Reset form and close modal
   const handleClose = () => {
-    setName("");
-    setAmount("");
-    setCategory("");
-    setDate("");
+    setFormData({
+      name: "",
+      amount: "",
+      category: "",
+      date: ""
+    });
     setErrors({});
     setShowDropdown(false);
     onClose();
@@ -106,8 +115,8 @@ const TransactionsModal = ({ isOpen, onClose, onSave }) => {
           <input
             type="text"
             placeholder="e.g. Coffee at Starbucks"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           />
           {errors.name && <p className="error-text">{errors.name}</p>}
 
@@ -116,8 +125,8 @@ const TransactionsModal = ({ isOpen, onClose, onSave }) => {
           <input
             type="number"
             placeholder="Enter amount"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
+            value={formData.amount}
+            onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
           />
           {errors.amount && <p className="error-text">{errors.amount}</p>}
 
@@ -125,14 +134,14 @@ const TransactionsModal = ({ isOpen, onClose, onSave }) => {
           <label>Category</label>
           <div className="dropdown" ref={dropdownRef}>
             <div className="dropdown-selected" onClick={() => setShowDropdown(!showDropdown)}>
-              {category || "Select Category"}
+              {formData.category || "Select Category"}
               <span className="arrow">&#9662;</span>
             </div>
             {showDropdown && (
               <div className="dropdown-menu">
                 {categories.map((cat) => (
                   <div key={cat} className="dropdown-item" onClick={() => {
-                    setCategory(cat);
+                    setFormData({ ...formData, category: cat });
                     setShowDropdown(false);
                   }}>
                     {cat}
@@ -147,8 +156,8 @@ const TransactionsModal = ({ isOpen, onClose, onSave }) => {
           <label>Date</label>
           <input
             type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
+            value={formData.date}
+            onChange={(e) => setFormData({ ...formData, date: e.target.value })}
           />
           {errors.date && <p className="error-text">{errors.date}</p>}
         </div>
@@ -162,6 +171,13 @@ const TransactionsModal = ({ isOpen, onClose, onSave }) => {
       </div>
     </div>
   );
+};
+
+// Prop type validation
+TransactionsModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
 };
 
 export default TransactionsModal;
