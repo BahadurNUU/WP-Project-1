@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Button from '../../components/Button/Button'
 import { useFinanceData } from "../../context/FinanceContext";
 import TransactionsModal from "./TransactionsModal";
 import "./TransactionsPage.css";
@@ -74,7 +73,9 @@ const TransactionsPage = () => {
       {/* Header Section */}
       <div className="transactions-header">
         <h2>Transactions</h2>
-        <Button onClick={() => setShowModal(true)} type='primary'>+Add Transaction</Button>
+        <button className="add-transaction-btn" onClick={() => setIsModalOpen(true)}>
+          + Add Transaction
+        </button>
       </div>
 
       {/* Search & Filters Section */}
