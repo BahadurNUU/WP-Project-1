@@ -32,7 +32,7 @@ export default function  BudgetsPage() {
     >
       <div className="d-flex">
         <h2 className="section-title">Budgets</h2>
-        <Button onClick={() => setShowModal(true)} type='primary'>Add New Budget</Button>
+        <Button onClick={() => setShowModal(true)} type='primary'>+Add New Budget</Button>
       </div>
 
       <div id='budgets-container'>
